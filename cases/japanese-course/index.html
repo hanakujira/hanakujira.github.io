@@ -39,14 +39,51 @@
   .kv{color:var(--sub)}
   footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
     color:var(--sub); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px}
+  /* ===== 螢幕上的列印按鈕 ===== */
+  .printbar{max-width:860px; margin:0 auto 16px; display:flex; justify-content:flex-end; gap:10px}
+  .printbar button{
+    font:inherit; font-size:14px; padding:9px 20px; border-radius:999px;
+    border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer;
+  }
+  .printbar button:hover{opacity:.88}
+
+  /* ===== A4 列印 ===== */
+  @page{ size:A4; margin:18mm 15mm 16mm; }
   @media print{
-    body{background:#fff; padding:0; font-size:12pt}
-    main{border:0; box-shadow:none; padding:0; max-width:none}
-    h2{page-break-after:avoid} table{page-break-inside:avoid}
+    body{background:#fff; padding:0; font-size:10.5pt; line-height:1.65; color:#000}
+    main{border:0; box-shadow:none; padding:0; max-width:none; border-radius:0}
+    .printbar{display:none !important}
+    h1{font-size:21pt; margin:0 0 4pt}
+    h1 + .meta{font-size:8.5pt; margin-bottom:12pt}
+    h2{font-size:13.5pt; margin:15pt 0 5pt; padding-bottom:3pt;
+       border-bottom:1pt solid #bbb; break-after:avoid; page-break-after:avoid}
+    h2::before{display:none}
+    h3{font-size:11pt; margin:11pt 0 4pt; color:#000; break-after:avoid; page-break-after:avoid}
+    p{margin:4pt 0}
+    ul{margin:4pt 0; padding-left:1.1em}
+    li{margin:2pt 0}
+    table{font-size:9pt; margin:6pt 0 10pt}
+    thead{display:table-header-group}
+    tr{break-inside:avoid; page-break-inside:avoid}
+    th,td{padding:3.5pt 5pt; border:0.6pt solid #999}
+    thead th{background:#ededed !important; white-space:normal}
+    tbody tr:nth-child(even){background:#f8f8f8 !important}
+    td:first-child{color:#000; white-space:nowrap}
+    code,.jp{background:#f0f0f0 !important; font-size:9pt}
+    .lead{background:#f4f4f4 !important; border-left:3pt solid #444; color:#000;
+          padding:7pt 9pt; font-size:9.5pt; margin:8pt 0 6pt;
+          break-inside:avoid; page-break-inside:avoid}
+    .lead p{margin:2pt 0}
+    .todo{background:#f7f7f7 !important}
+    a{color:#000; text-decoration:none}
+    footer{margin-top:14pt; padding-top:5pt; border-top:0.6pt solid #999;
+           font-size:8pt; display:block}
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
   }
 </style>
 </head>
 <body>
+<div class="printbar"><button type="button" onclick="window.print()">列印 / 存成 PDF(A4)</button></div>
 <main>
 
   <h1>日語教學影片 → 重點表</h1>
