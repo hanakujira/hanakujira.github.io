@@ -1,0 +1,72 @@
+:root{
+  --ink:#1d2430; --muted:#5d6a7e; --line:#e3e8ef; --bg:#fbfcfd; --accent:#2f6fd0;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink); line-height:1.8;
+  font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{
+  border-bottom:1px solid var(--line); background:#fff;
+}
+nav .wrap{display:flex;gap:20px;align-items:center;height:56px;font-size:15px}
+nav .brand{font-weight:700;color:var(--ink);margin-right:auto}
+header.top{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin:0 0 16px;letter-spacing:-.01em}
+.lede{font-size:18px;color:var(--muted);margin:0;max-width:34em}
+.lede strong{color:var(--ink);font-weight:600}
+section{padding:48px 0;border-bottom:1px solid var(--line)}
+h2{font-size:20px;margin:0 0 6px}
+.sub{color:var(--muted);font-size:15px;margin:0 0 24px}
+
+/* 文章列表 */
+ul.posts{list-style:none;margin:0;padding:0}
+ul.posts li{border-bottom:1px solid var(--line);padding:20px 0}
+ul.posts li:last-child{border-bottom:none}
+ul.posts a{font-size:18px;font-weight:600;color:var(--ink)}
+ul.posts .meta{color:var(--muted);font-size:14px;margin-top:4px}
+
+/* 服務卡 */
+.cards{display:grid;gap:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:start}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.price{text-align:right;white-space:nowrap}
+.price b{font-size:20px;display:block;letter-spacing:-.01em}
+.price span{font-size:13px;color:var(--muted)}
+.note{background:#fff;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:16px 20px;color:var(--muted);font-size:15px;margin-top:26px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:20px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:14px;font-weight:700}
+ol.steps b{display:block}
+ol.steps span{color:var(--muted);font-size:15px}
+ul.plain{margin:0;padding-left:1.2em;color:var(--muted)}
+ul.plain li{margin-bottom:6px}
+.cta{display:inline-block;background:var(--accent);color:#fff;padding:14px 28px;border-radius:10px;font-weight:600}
+.cta:hover{text-decoration:none;opacity:.9}
+
+/* 文章本文 */
+article.post{padding:48px 0 72px}
+article.post h1{font-size:clamp(25px,4.5vw,34px);margin-bottom:28px}
+article.post h2{font-size:21px;margin:44px 0 12px;padding-top:8px}
+article.post h3{font-size:17px;margin:32px 0 10px}
+article.post p{margin:0 0 18px}
+article.post blockquote{margin:24px 0;padding:4px 0 4px 20px;border-left:3px solid var(--line);color:var(--muted)}
+article.post blockquote p:last-child{margin-bottom:0}
+article.post ul,article.post ol{padding-left:1.4em;margin:0 0 18px}
+article.post li{margin-bottom:8px}
+article.post pre{background:#11161f;color:#e6edf3;padding:16px 18px;border-radius:10px;overflow:auto;font-size:14px;line-height:1.6;margin:0 0 18px}
+article.post code{font-family:"Cascadia Mono",Consolas,monospace;font-size:.92em;background:#eef1f5;padding:2px 5px;border-radius:4px}
+article.post pre code{background:none;padding:0;font-size:inherit;color:inherit}
+article.post table{border-collapse:collapse;width:100%;margin:0 0 20px;font-size:15px;background:#fff}
+article.post th,article.post td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+article.post th{background:#f3f6fa;font-weight:600}
+article.post hr{border:none;border-top:1px solid var(--line);margin:36px 0}
+article.post img{max-width:100%}
+footer{padding:40px 0 80px;color:var(--muted);font-size:14px}
+@media(max-width:560px){.card{grid-template-columns:1fr}.price{text-align:left}}
