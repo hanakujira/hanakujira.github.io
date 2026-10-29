@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四份名單、12 筆資料,合成一張表</title>
+<meta name="description" content="我真的跑了一次,順便記下六個只有做過才會遇到的坑。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="把一團亂變成一份表">
+<meta property="og:title" content="四份名單、12 筆資料,合成一張表">
+<meta property="og:description" content="我真的跑了一次,順便記下六個只有做過才會遇到的坑。">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">hanakujira</a>
+  <a href="../index.html">文章</a>
+  <a href="../service/index.html">服務</a>
+</div></nav>
+<div class="wrap"><article class="post"><h1>四份名單、12 筆資料,合成一張表 —— 我真的跑了一次</h1>
+<blockquote><p>這場景你可能很熟:辦一場活動,報名有報名表、群組有記事本、舊系統有一份匯出、<br>現場又手寫了一張簽到表。四份東西、四種格式,沒有人知道到底來了幾個<strong>人</strong>。<br><br>我用一台「沒有 Excel、沒有安裝任何軟體」的 Windows 電腦,把這件事從頭做了一遍。<br>這篇記的是結果,還有六個只有真的做過才會遇到的坑。</p></blockquote>
+<h2>先看結果</h2>
+<p>四份來源長這樣:</p>
+<table>
+<tr><th>來源</th><th>長相</th></tr>
+<tr><td>報名表 CSV</td><td>姓名、電話 <code>0912-345 678</code>、日期 <code>2024/1/5</code>、費用 <code>"1,500"</code></td></tr>
+<tr><td>LINE 記事本</td><td>Tab 分隔、<strong>全形</strong>數字 <code>０９８７－６５４－３２１</code>、沒有 email</td></tr>
+<tr><td>舊系統匯出</td><td><strong>Big5 編碼</strong>、欄名 <code>cust_name</code>、日期 <code>20240107</code>、金額 <code>NT$1,500</code></td></tr>
+<tr><td>現場簽到</td><td>只有名字和金額、全形 <code>１５００</code></td></tr>
+</table>
+<p><strong>12 筆原始資料,最後是 6 個人。</strong></p>
+<pre><code>陳怡君  0912-345-678  yichun@example.com   2024-01-05  1500  報名表 + 舊系統
+林志豪  0987-654-321  lin.zh@example.com   2024-01-07  1500  報名表 + LINE + 現場
+黃美玲  0933-111-222  meiling@example.com  2024-01-07  1500  報名表 + LINE + 舊系統 + 現場
+王建民  0922-333-444  wang44@example.com   2024-01-12  1500  舊系統
+小林    0911-222-333                              0          LINE
+許雅婷                                             1500       現場</code></pre>
+<p>注意最右邊那一欄「來源」——它是我刻意留的。<strong>不要刪掉它。</strong><br>有它在,你才看得出「這個人是四個地方都出現過」還是「只有現場那張紙上有」,<br>出錯的時候也才追得回去。</p>
+<h2>三個關鍵決定(比技巧重要)</h2>
+<h3>1. 先決定「什麼叫做同一個人」</h3>
+<p>整件事只有這一個問題,其餘都是細節。</p>
+<p>我的順序是:<strong>手機 → Email → 姓名</strong>。有手機就用手機當鍵,沒有才退到 Email,<br>兩個都沒有、只剩名字的,才用名字去對。</p>
+<p>但這裡有個地雷:<strong>用名字對,遇到同名就完了。</strong> 我這份假資料裡,<br>現場簽到表只有「林志豪」「黃美玲」兩個名字,靠名字對回去了;<br>如果現場有兩個「陳怡君」,你就會把兩個人的資料黏成一個。</p>
+<p><strong>真實資料裡,先問清楚「有沒有第二個欄位可以當鍵」</strong>——身分證末三碼、訂單編號、<br>報名序號,什麼都比名字可靠。</p>
+<h3>2. 欄位先定好,再開始合</h3>
+<p>不要一邊合併一邊想欄位。先寫下最終表要有哪幾欄:</p>
+<pre><code>姓名 / 手機 / Email / 報名日期 / 費用 / 來源</code></pre>
+<p>欄位定了,每個來源的資料就知道該往哪裡倒。反過來做,你會合併到一半發現<br>「舊系統有『公司名稱』但報名表沒有」,然後整份重來。</p>
+<h3>3. 格式全部先洗乾淨,再做比對</h3>
+<p>這一步不做,後面全部白費。</p>
+<h2>六個我真的踩到的坑</h2>
+<h3>坑 1:金額寫 <code>1,500</code>,用逗號硬切會變成 <strong>1 元</strong></h3>
+<p>第一版我貪快,自己用「逗號」把每一行切開。結果 <code>"1,500"</code> 被切成 <code>1</code> 和 <code>500</code>,<br>費用欄變成 <strong>1 元</strong>。而且它不會報錯,就安安靜靜地錯。</p>
+<p><strong>正解:用真正的 CSV 解析器</strong>,不要自己切字串。CSV 是有一種「用引號包起來、<br>裡面可以有逗號」的規則的。</p>
+<blockquote><p>這就是為什麼「看起來很簡單」的表格工作會出事:錯的地方不會亮紅燈,<br>你要自己去看數字對不對。</p></blockquote>
+<h3>坑 2:全形數字永遠對不上</h3>
+<p><code>０９８７－６５４－３２１</code> 和 <code>0987-654-321</code> 在你看起來是同一支電話,<br>在電腦看起來是兩串完全不同的字元。</p>
+<p>洗的方式:全形轉半形、只留數字、再照你要的格式重排。洗完之後,<br><code>０９８７－６５４－３２１</code>、<code>0987654321</code>、<code>0987 654 321</code> 都會變成 <code>0987-654-321</code>。</p>
+<h3>坑 3:日期有三種寫法</h3>
+<p><code>2024/1/5</code>、<code>20240107</code>、<code>2024-01-05</code> —— 不統一的話,排序會亂、篩選會漏。<br>一律轉成 <code>2024-01-07</code> 這種 <code>年-月-日</code>(補零),好處是它<strong>照字面排序就等於照時間排序</strong>。</p>
+<h3>坑 4:金額有三種長相</h3>
+<p><code>1500</code>、<code>1,500</code>、<code>NT$1,500</code>、<code>１５００</code>。全部只留數字再轉成整數。<br><strong>不要留小數點和貨幣符號在儲存格裡</strong>——那會讓它變成文字,<code>SUM</code> 加不起來。</p>
+<h3>坑 5:舊系統匯出是 Big5</h3>
+<p>打開是亂碼的時候,先別急著重打。<strong>九成是編碼問題,不是檔案壞了。</strong><br>指定 Big5 讀就正常了。</p>
+<h3>坑 6:合併完,還是有 2 個人「不完整」</h3>
+<p>許雅婷只有現場那張紙上的名字和金額,沒有電話、沒有 Email、沒有日期。<br>小林有電話但沒有 Email。</p>
+<p><strong>這不是失敗,這是真實結果。</strong> 硬湊出一個完整的表格才是假的。<br>合併的真正價值是:<strong>把「不知道」的地方圈出來,讓你去問那幾個人。</strong></p>
+<h2>不寫程式的人怎麼做</h2>
+<p>上面那些用 Google Sheets 也做得到,不用裝任何東西:</p>
+<ul>
+<li><strong><code>IMPORTRANGE</code></strong> —— 把好幾份試算表的資料撈到同一張</li>
+<li><strong><code>QUERY</code></strong> —— 用類似 SQL 的寫法篩選、排序</li>
+<li><strong>資料透視表</strong> —— 一眼看出重複和缺漏</li>
+<li><strong><code>TRIM</code> / <code>PROPER</code> / <code>VALUE</code></strong> —— 洗掉多餘空白、統一大小寫、把文字轉成數字</li>
+</ul>
+<p>小量的話,手動也行。<strong>但只要來源超過三份、筆數超過一百,手動就一定會錯</strong>——<br>不是你不小心,是這種工作天生就會錯。</p>
+<hr>
+<p><strong>一句話總結:表格不是「把資料放進去」,是「先決定什麼叫做同一個人」。</strong></p>
+<hr>
+<p>*這篇的資料全部是假的,但過程是真的跑過的:四份來源、12 筆進去、6 個人出來、<br>六個坑都真的撞到才寫下來。*</p><div class="note" style="margin-top:44px">這件事我可以幫你做 —— <a href="../service/index.html">看服務內容與價錢</a></div></article></div>
+<footer><div class="wrap">內容以繁體中文撰寫。</div></footer>
+</body>
+</html>

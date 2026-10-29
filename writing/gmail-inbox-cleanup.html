@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三萬三千封的收件匣,只用 Gmail 內建功能清乾淨</title>
+<meta name="description" content="不裝任何外掛、一封信都沒刪,一小時把收件匣縮掉九成。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="把一團亂變成一份表">
+<meta property="og:title" content="三萬三千封的收件匣,只用 Gmail 內建功能清乾淨">
+<meta property="og:description" content="不裝任何外掛、一封信都沒刪,一小時把收件匣縮掉九成。">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">hanakujira</a>
+  <a href="../index.html">文章</a>
+  <a href="../service/index.html">服務</a>
+</div></nav>
+<div class="wrap"><article class="post"><h1>三萬三千封的收件匣,只用 Gmail 內建功能清乾淨</h1>
+<blockquote><p>給「收件匣爆掉但不想裝任何第三方 App」的人。全程只用 Gmail 網頁版原本就有的東西:<br>搜尋語法、封存、篩選器。不裝擴充、不給別人讀信權限、不會刪掉任何一封信。</p></blockquote>
+<h2>先講結論</h2>
+<p>一個累積了十幾年、塞了三萬多封信的免費 Gmail,可以在一小時內把收件匣從 <strong>約 33,000 封降到約 4,000 封</strong>,<br>而且:</p>
+<ul>
+<li><strong>一封信都沒刪</strong>(Google 的「所有郵件」總數前後完全一樣)</li>
+<li><strong>沒有產生重複</strong></li>
+<li>之後新進來的廣告信會<strong>自動繞過收件匣</strong>,分進各自的標籤</li>
+</ul>
+<p>留下來的四千封不是沒清完,是<strong>故意留的</strong>(下面會說為什麼)。</p>
+<hr>
+<h2>第 0 步:先搞清楚「收件匣」和「所有郵件」是兩件事</h2>
+<p>這是最多人卡住的地方。</p>
+<ul>
+<li><strong>收件匣(Inbox)</strong>:待辦清單。它只是「信件的一個標籤」,不是資料夾。</li>
+<li><strong>所有郵件(All Mail)</strong>:真正的資料庫,所有信都在這裡,包括你已經封存掉的。</li>
+</ul>
+<p>所以「<strong>封存(Archive)</strong>」≠「刪除」。封存只是把信從收件匣這個標籤上拿掉,<br>信還在「所有郵件」裡,搜尋還找得到,手機上還讀得到。</p>
+<p><strong>清理收件匣 = 把不重要的信從待辦清單上移走,不是把信消滅。</strong><br>想通這件事,心態就從「我不敢刪」變成「我只要搬」。</p>
+<hr>
+<h2>第 1 步:先數,不要先動手</h2>
+<p>Gmail 搜尋框支援一堆實用語法,先量一下規模再決定要花多少力氣:</p>
+<table>
+<tr><th>想知道的</th><th>搜尋語法</th></tr>
+<tr><td>總共有幾封在收件匣</td><td>看左側「收件匣」旁邊的數字</td></tr>
+<tr><td>一年以上的信</td><td><code>older_than:1y</code></td></tr>
+<tr><td>半年以上</td><td><code>older_than:6m</code></td></tr>
+<tr><td>促銷類</td><td><code>category:promotions</code></td></tr>
+<tr><td>通知/帳務類</td><td><code>category:updates</code></td></tr>
+<tr><td>社群通知</td><td><code>category:social</code></td></tr>
+<tr><td>主要(真人來信)</td><td><code>category:primary</code></td></tr>
+<tr><td>有附件</td><td><code>has:attachment</code></td></tr>
+<tr><td>沒讀過的</td><td><code>is:unread</code></td></tr>
+</table>
+<p><strong>語法可以疊</strong>:<code>category:promotions older_than:1y</code>、<code>(category:promotions OR category:social) older_than:2y</code>。<br>搜尋結果上方會寫「約 X 封」,那就是你要搬的量。</p>
+<blockquote><p>我自己的實測:收件匣約 33,000 封,其中「一年以上的促銷+通知+社群」就有 <strong>約 29,000 封</strong>。<br>換句話說,八成以上的收件匣根本是廣告倉庫,不是信箱。</p></blockquote>
+<hr>
+<h2>第 2 步:分類,決定「哪些該搬、哪些不能搬」</h2>
+<p>Gmail 自動把信分成四類:<strong>主要 / 促銷 / 社群 / 更新</strong>。清理策略大概是:</p>
+<table>
+<tr><th>分類</th><th>該不該搬離收件匣</th></tr>
+<tr><td>促銷(promotions)</td><td>✅ 搬,而且從此以後都別讓它進收件匣</td></tr>
+<tr><td>社群(social)</td><td>✅ 搬(社群網站通知,幾乎沒人回頭看)</td></tr>
+<tr><td>更新(updates)</td><td>⚠️ <strong>小心</strong>。銀行、信用卡、電商、帳單通知常常被歸在這一類</td></tr>
+<tr><td>主要(primary)</td><td>❌ 不搬,這裡是真人寫給你的信</td></tr>
+</table>
+<p><strong>「更新」這一類是陷阱。</strong> 很多人一鍵清空「更新」,結果帳單通知、刷卡通知、電子發票全部沉到下面,<br>等到要對帳才發現找不到。這是我自己踩過的坑:前一版計畫本來要把 <code>category:updates</code> 也一起擋掉,<br>後來打開寄件者名單一看——某家銀行 500 封、另一家銀行 150 封、某個數位帳戶 130 封、某應用程式商店 200 封……<br><strong>這些是帳務紀錄,不是垃圾。</strong> 所以更新類一律留著,最多另外貼標籤分類。</p>
+<blockquote><p>判斷方法:搬之前先看「寄件者」。如果名單裡出現銀行、電商、電信、保險、稅務 → 那批不要動。</p></blockquote>
+<hr>
+<h2>第 3 步:一次搬一大批(純網頁操作)</h2>
+<ol>
+<li>搜尋框輸入條件,例如:</li>
+</ol>
+<p>   <code>(category:promotions OR category:social) older_than:1y</code></p>
+<ol>
+<li>按 Enter,等結果出來。</li>
+<li>勾選結果列表<strong>最上面那一格的核取方塊</strong>。</li>
+<li>上方會出現一行字:「已選取本頁 50 個會話群組。<strong>選取所有符合此搜尋條件的會話群組</strong>」——</li>
+</ol>
+<p>   點那行連結,它才會選「全部」,不是只有這一頁。</p>
+<ol>
+<li>按工具列上的<strong>封存</strong>圖示(向下的箭頭箱子)。</li>
+</ol>
+<p>這樣就一次搬完了。想分批做也可以,把 <code>older_than:1y</code> 改成 <code>older_than:3y</code> 之類的一段一段搬。</p>
+<p><strong>搬完檢查一下</strong>:左側「所有郵件」的數字應該幾乎沒變(封存不會增減總數)。<br>如果總數掉了,代表你按到的是刪除,不是封存——去「垃圾桶」救回來就好(垃圾桶有 30 天)。</p>
+<hr>
+<h2>第 4 步:防未來 —— 讓廣告信以後直接繞過收件匣</h2>
+<p>清完如果不設規則,過半年又是一樣。這步叫<strong>篩選器(Filter)</strong>:</p>
+<ol>
+<li>右上齒輪 → <strong>查看所有設定</strong> → <strong>篩選器和已封鎖的地址</strong></li>
+<li>點 <strong>建立新篩選器</strong></li>
+<li>在「包含字詞」填入:<code>category:promotions</code></li>
+<li>按 <strong>建立篩選器</strong></li>
+<li>勾 <strong>略過收件匣(封存)</strong>,勾 <strong>套用標籤</strong> 並新建一個「促銷」</li>
+<li>按 <strong>建立篩選器</strong></li>
+</ol>
+<p>再重複一次,把 <code>category:promotions</code> 換成 <code>category:social</code>、標籤叫「社群」。</p>
+<p><strong>注意 <code>category:updates</code> 不要設成「略過收件匣」</strong>——理由同第 2 步,那條規則會讓帳單直接消失。</p>
+<blockquote><p>小提醒:篩選器只對「之後進來」的信生效。已經在收件匣裡的,要另外用第 3 步搬一次。</p></blockquote>
+<h3>如果篩選器頁面「建立篩選器」按了沒反應</h3>
+<p>遇到過的話(某些版本的 Gmail 網頁有這個毛病),還有第二條路:<strong>用 XML 匯入</strong>。<br>同一個設定頁下方有「匯入篩選器」,可以餵一份這種格式的檔案:</p>
+<pre><code>&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'&gt;
+  &lt;title&gt;Mail Filters&lt;/title&gt;
+  &lt;entry&gt;
+    &lt;category term='filter'&gt;&lt;/category&gt;
+    &lt;title&gt;Mail Filter&lt;/title&gt;
+    &lt;content&gt;&lt;/content&gt;
+    &lt;apps:property name='hasTheWord' value='category:promotions'/&gt;
+    &lt;apps:property name='shouldArchive' value='true'/&gt;
+    &lt;apps:property name='label' value='促銷'/&gt;
+  &lt;/entry&gt;
+&lt;/feed&gt;</code></pre>
+<p>選檔 → 預覽 → 按「建立篩選器」,會一次把裡面所有規則建好(標籤不存在會自動建立)。</p>
+<hr>
+<h2>那留下來的四千封是什麼?</h2>
+<p>清完之後我打開剩下的收件匣,寄件者前十名長這樣:</p>
+<table>
+<tr><th>寄件者</th><th>封數</th></tr>
+<tr><td>某電子報</td><td>約 600</td></tr>
+<tr><td>某家銀行</td><td>約 500</td></tr>
+<tr><td>某應用程式商店</td><td>約 300</td></tr>
+<tr><td>某支付服務</td><td>約 170</td></tr>
+<tr><td>另一家銀行</td><td>約 150</td></tr>
+<tr><td>某個數位帳戶</td><td>約 220</td></tr>
+<tr><td>其他:券商、電信、外送、串流</td><td>各 40–90</td></tr>
+</table>
+<p>——全部是<strong>帳務與消費紀錄</strong>。這批的價值不在「讀」,而在「哪天要對帳、要退訂、要報稅的時候找得到」。<br>所以它們留在收件匣,只有廣告和社群通知被搬走。</p>
+<p>如果你想更進一步,可以幫它們設一條<strong>只貼標籤、不略過收件匣</strong>的篩選器,<br>收件匣照樣會多,但至少能用標籤一鍵篩選。</p>
+<hr>
+<h2>一句話總結</h2>
+<blockquote><p><strong>收件匣不是倉庫,是待辦清單。</strong><br>封存不是刪除,篩選器才是治本。真正要小心的只有一件事:別把帳單當垃圾清掉。</p></blockquote><div class="note" style="margin-top:44px">這件事我可以幫你做 —— <a href="../service/index.html">看服務內容與價錢</a></div></article></div>
+<footer><div class="wrap">內容以繁體中文撰寫。</div></footer>
+</body>
+</html>
