@@ -1,255 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<title>日語教學影片 → 重點表</title>
-<style>
-  :root{
-    --ink:#23262b; --sub:#5c6470; --line:#e3e7ee; --head:#f5f7fb;
-    --accent:#3a6ea5; --accent-soft:#eaf1f8; --warn:#b26a1f; --bg:#ffffff;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; padding:48px 24px 80px; background:#fbfcfe; color:var(--ink);
-    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,-apple-system,"Segoe UI",sans-serif;
-    line-height:1.85; font-size:16px; -webkit-font-smoothing:antialiased;
-  }
-  main{max-width:860px; margin:0 auto; background:var(--bg); padding:56px 64px 72px;
-    border:1px solid var(--line); border-radius:14px; box-shadow:0 8px 30px rgba(35,38,43,.06);}
-  h1{font-size:30px; line-height:1.4; margin:0 0 8px; letter-spacing:.02em}
-  h1 + .meta{color:var(--sub); font-size:14px; margin-bottom:28px}
-  h2{font-size:21px; margin:44px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--accent-soft)}
-  h2::before{content:""; display:inline-block; width:6px; height:18px; background:var(--accent);
-    border-radius:3px; margin-right:10px; vertical-align:-3px}
-  h3{font-size:17px; margin:28px 0 10px; color:var(--accent)}
-  p{margin:10px 0}
-  ul{margin:10px 0 10px 4px; padding-left:22px}
-  li{margin:6px 0}
-  table{width:100%; border-collapse:collapse; margin:16px 0 22px; font-size:15px}
-  th,td{border:1px solid var(--line); padding:10px 12px; text-align:left; vertical-align:top}
-  thead th{background:var(--head); font-weight:600; white-space:nowrap}
-  tbody tr:nth-child(even){background:#fafbfd}
-  td:first-child{white-space:nowrap; color:var(--sub)}
-  code,.jp{font-family:"Noto Sans JP","Yu Gothic",Meiryo,monospace; background:#f3f5f9;
-    padding:1px 6px; border-radius:5px; font-size:14px}
-  .lead{background:var(--accent-soft); border-left:4px solid var(--accent); padding:14px 18px;
-    border-radius:0 8px 8px 0; color:#33404f; font-size:15px; margin:18px 0 8px}
-  .lead p{margin:4px 0}
-  .todo{border-left-color:var(--warn); background:#fdf6ec; color:#6b4a20}
-  .kv{color:var(--sub)}
-  footer{margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
-    color:var(--sub); font-size:13px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px}
-  /* ===== 螢幕上的列印按鈕 ===== */
-  .printbar{max-width:860px; margin:0 auto 16px; display:flex; justify-content:flex-end; gap:10px}
-  .printbar button{
-    font:inherit; font-size:14px; padding:9px 20px; border-radius:999px;
-    border:1px solid var(--accent); background:var(--accent); color:#fff; cursor:pointer;
-  }
-  .printbar button:hover{opacity:.88}
-
-  /* ===== A4 列印 ===== */
-  @page{ size:A4; margin:18mm 15mm 16mm; }
-  @media print{
-    body{background:#fff; padding:0; font-size:10.5pt; line-height:1.65; color:#000}
-    main{border:0; box-shadow:none; padding:0; max-width:none; border-radius:0}
-    .printbar{display:none !important}
-    h1{font-size:21pt; margin:0 0 4pt}
-    h1 + .meta{font-size:8.5pt; margin-bottom:12pt}
-    h2{font-size:13.5pt; margin:15pt 0 5pt; padding-bottom:3pt;
-       border-bottom:1pt solid #bbb; break-after:avoid; page-break-after:avoid}
-    h2::before{display:none}
-    h3{font-size:11pt; margin:11pt 0 4pt; color:#000; break-after:avoid; page-break-after:avoid}
-    p{margin:4pt 0}
-    ul{margin:4pt 0; padding-left:1.1em}
-    li{margin:2pt 0}
-    table{font-size:9pt; margin:6pt 0 10pt}
-    thead{display:table-header-group}
-    tr{break-inside:avoid; page-break-inside:avoid}
-    th,td{padding:3.5pt 5pt; border:0.6pt solid #999}
-    thead th{background:#ededed !important; white-space:normal}
-    tbody tr:nth-child(even){background:#f8f8f8 !important}
-    td:first-child{color:#000; white-space:nowrap}
-    code,.jp{background:#f0f0f0 !important; font-size:9pt}
-    .lead{background:#f4f4f4 !important; border-left:3pt solid #444; color:#000;
-          padding:7pt 9pt; font-size:9.5pt; margin:8pt 0 6pt;
-          break-inside:avoid; page-break-inside:avoid}
-    .lead p{margin:2pt 0}
-    .todo{background:#f7f7f7 !important}
-    a{color:#000; text-decoration:none}
-    footer{margin-top:14pt; padding-top:5pt; border-top:0.6pt solid #999;
-           font-size:8pt; display:block}
-    *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
-  }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>三小時的日語課,整理成一張重點表 ─ 把一團亂變成一份表</title>
+<meta name="description" content="一支三小時的日語教學影片,怎麼在不看完的情況下抽出目錄、模板和重點 —— 做法說明加成品節錄。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="把一團亂變成一份表">
+<meta property="og:title" content="三小時的日語課,整理成一張重點表">
+<meta property="og:description" content="一支三小時的日語教學影片,怎麼在不看完的情況下抽出目錄、模板和重點。">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-<div class="printbar"><button type="button" onclick="window.print()">列印 / 存成 PDF(A4)</button></div>
-<main>
+<nav><div class="wrap">
+  <a class="brand" href="../../index.html">hanakujira</a>
+  <a href="../../index.html">文章</a>
+  <a href="../../service/index.html">服務</a>
+</div></nav>
+<div class="wrap"><article class="post">
+<h1>三小時的日語課,整理成一張重點表</h1>
+<blockquote><p>有人想學日文,但影片太長,看不完。<br>
+要做的事很簡單:把三小時壓成一張打開就能用的表。<br><br>
+範例已經去識別化 —— 影片名稱、頻道、連結都拿掉,只留結構與做法。</p></blockquote>
 
-  <h1>日語教學影片 → 重點表</h1>
-  <div class="meta">
-    素材:〈终于把日语整理成《动画片》~逼自己一个月学完〉／日語小奈老師<br>
-    長度 3:02:16|270 萬觀看|整理日 2026-10-29
-  </div>
+<h2>委託長什麼樣</h2>
+<ul>
+  <li><strong>素材</strong>:一支日語教學影片,長度大約三小時(實際長度不公開)。</li>
+  <li><strong>要的</strong>:重點整理成一張表,不用看完整支影片也能知道課裡教了什麼、順序是什麼。</li>
+</ul>
 
-  <div class="lead">
-    <p><strong>怎麼整理的:</strong>不是逐分鐘看完,而是三步 ——</p>
-    <p>① 先從影片的章節清單拿到<strong>完整目錄與時間點</strong>(共 25 段)</p>
-    <p>② 再進每一段抽一兩張畫面,抓出「這段在教什麼、用什麼模板」</p>
-    <p>③ 按模板把表格排出來</p>
-    <p>目錄與分類是完整的;標「待補」的地方是還沒逐格抽畫面的部分。</p>
-  </div>
+<h2>怎麼做的(三小時的影片,只看不到十分鐘)</h2>
+<ol class="steps">
+  <li><b>先看目錄,不看片</b><span>影片下方的章節清單有二十幾段標題和時間點。先把骨架抄下來,就知道這堂課分成哪幾篇。</span></li>
+  <li><b>找重複的模板</b><span>五十音那一大段幾乎佔了全片一半,但每一行假名都是同一個四步在跑。抓到模板之後,那一段就不用逐頁抄。</span></li>
+  <li><b>只抽要驗證的畫面</b><span>挑幾個時間點跳過去看,確認骨架對不對。不對就調整,對了再往下補。</span></li>
+</ol>
+<p class="sub">順序很重要:先確認格式對不對,再花時間補完。反過來做的話,格式錯了就整份重來。</p>
 
-  <h2>一、全片目錄</h2>
-  <p class="kv">全片沒有獨立的「口語聽力篇」,實際是<strong>發音基礎篇(3:36–2:24)</strong>+ <strong>語法框架篇(2:24–結尾)</strong>兩大塊。</p>
-  <table>
-    <thead><tr><th>時間</th><th>段名</th><th>歸類</th></tr></thead>
-    <tbody>
-      <tr><td>00:00</td><td>前言</td><td>開場</td></tr>
-      <tr><td>03:36</td><td>日語的構成</td><td>發音基礎篇</td></tr>
-      <tr><td>25:41</td><td>五十音 あ行</td><td>發音基礎篇</td></tr>
-      <tr><td>39:42</td><td>五十音 か行</td><td>發音基礎篇</td></tr>
-      <tr><td>48:33</td><td>五十音 さ行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:00:02</td><td>五十音 た行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:08:56</td><td>五十音 な行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:19:04</td><td>五十音 は行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:29:49</td><td>五十音 ま行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:38:59</td><td>五十音 や行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:44:37</td><td>五十音 ら行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:54:48</td><td>五十音 わ行</td><td>發音基礎篇</td></tr>
-      <tr><td>1:59:48</td><td>撥音(ん)</td><td>發音基礎篇</td></tr>
-      <tr><td>2:01:57</td><td>促音(っ)</td><td>發音基礎篇</td></tr>
-      <tr><td>2:04:29</td><td>拗音</td><td>發音基礎篇</td></tr>
-      <tr><td>2:08:47</td><td>濁音和半濁音</td><td>發音基礎篇</td></tr>
-      <tr><td>2:16:15</td><td>長音</td><td>發音基礎篇</td></tr>
-      <tr><td>2:24:57</td><td>語法1:表達身份</td><td>語法框架篇</td></tr>
-      <tr><td>2:28:39</td><td>語法2:否定身份</td><td>語法框架篇</td></tr>
-      <tr><td>2:31:56</td><td>語法3:一般疑問</td><td>語法框架篇</td></tr>
-      <tr><td>2:36:09</td><td>語法4:所有格</td><td>語法框架篇</td></tr>
-      <tr><td>2:41:06</td><td>語法5:表達確認</td><td>語法框架篇</td></tr>
-      <tr><td>2:45:10</td><td>語法6:～は～で、～です 的用法</td><td>語法框架篇</td></tr>
-      <tr><td>2:49:49</td><td>語法7:數數</td><td>語法框架篇</td></tr>
-      <tr><td>2:55:36</td><td>語法8:人數、歲數、年級</td><td>語法框架篇</td></tr>
-    </tbody>
-  </table>
+<h2>成品長這樣(節錄)</h2>
+<p>下面是完整版裡的兩小段。整份是四頁 A4。</p>
 
-  <h2>二、日語的構成(03:36)</h2>
-  <table>
-    <thead><tr><th>文字</th><th>用途</th><th>例子</th></tr></thead>
-    <tbody>
-      <tr><td>漢字</td><td>表意。分三種:①簡體(人・手・足)②整體,即繁體(鳥・現・語)③和字,日本自製(辻・働・凪)</td><td>私、食</td></tr>
-      <tr><td>平假名</td><td>①標注漢字發音 ②組成單詞 ③當助詞</td><td>は、べました</td></tr>
-      <tr><td>片假名</td><td>①外來語 ②擬聲擬態詞 ③強調</td><td>ハンバーガー</td></tr>
-      <tr><td>羅馬音</td><td>標音、打字輸入用</td><td>basu(バス)</td></tr>
-    </tbody>
-  </table>
+<h3>一、課程分成三篇</h3>
+<table>
+<tr><th>篇章</th><th>內容</th></tr>
+<tr><td>發音基礎</td><td>五十音(平假名 / 片假名)、發音、羅馬拼音</td></tr>
+<tr><td>語法框架</td><td>句型結構、助詞、動詞變化</td></tr>
+<tr><td>口語聽力</td><td>聽力與口說練習</td></tr>
+</table>
 
-  <h2>三、五十音:每一行都是同一個四步模板</h2>
-  <p>影片的教法固定四步,<strong>學會一個假名 = 走完這四步</strong>:</p>
-  <ul>
-    <li><strong>1. 聯想記憶</strong> —— 用一句諧音故事記住發音</li>
-    <li><strong>2. 平假名寫法</strong>(筆順)</li>
-    <li><strong>3. 片假名寫法</strong>(筆順)</li>
-    <li><strong>4. 單詞練習</strong></li>
-  </ul>
-  <p>也就是說,影片裡 1.5 小時的五十音段落,內容其實是「46 個假名 × 同一個模板」。抓到模板之後就能自己往後推,不必跟著看完。</p>
-  <table>
-    <thead><tr><th>行</th><th>聯想記憶(影片原句)</th><th>假名</th></tr></thead>
-    <tbody>
-      <tr><td>あ行</td><td>诶(え)?!元(え)且要工(工)作!</td><td>え / エ</td></tr>
-      <tr><td>さ行</td><td>经(ス)过九(す)天長出了丝瓜</td><td>す / ス</td></tr>
-      <tr><td>な行</td><td>匈奴(ぬ)又(ヌ)来了</td><td>ぬ / ヌ</td></tr>
-      <tr><td>ま行</td><td>抹(ま)布擦马(マ)桶蓋</td><td>ま / マ</td></tr>
-      <tr><td>ら行</td><td>歹(ら)徒(る)绑走了我的儿(ル)子</td><td>る / ル</td></tr>
-    </tbody>
-  </table>
-  <p class="kv">其他 41 個假名的聯想句:待補。</p>
+<h3>二、日語的四種文字</h3>
+<table>
+<tr><th>文字</th><th>用途</th><th>例子</th></tr>
+<tr><td>漢字</td><td>表意;分簡體、繁體、日本自製漢字</td><td>私、食</td></tr>
+<tr><td>平假名</td><td>標注漢字讀音、組成單詞、當助詞</td><td>は、べました</td></tr>
+<tr><td>片假名</td><td>外來語、擬聲擬態詞、強調</td><td>ハンバーガー</td></tr>
+<tr><td>羅馬拼音</td><td>標音、打字輸入用</td><td>basu</td></tr>
+</table>
 
-  <h2>四、特殊音(1:59:48 – 2:24)</h2>
-  <table>
-    <thead><tr><th>段</th><th>重點</th></tr></thead>
-    <tbody>
-      <tr><td>撥音 1:59:48</td><td>ん —— 唯一沒有母音的假名,跟在其他音後面</td></tr>
-      <tr><td>促音 2:01:57</td><td>っ —— 停一拍,不發音</td></tr>
-      <tr><td>拗音 2:04:29</td><td>い段假名(い 以外)右下角加小寫 ゃ / ゅ / ょ,合成一拍:き + ゃ → きゃ(kya)</td></tr>
-      <tr><td>濁音・半濁音 2:08:47</td><td>加濁點「゛」/ 半濁點「゜」</td></tr>
-      <tr><td>長音 2:16:15</td><td>拉長一拍(母音延長)</td></tr>
-    </tbody>
-  </table>
+<p>完整版另有:五十音每一行的記憶法整理、語法八個單元的順序、以及每一段的時間點,方便回頭查。</p>
 
-  <h2>五、語法框架篇:8 講</h2>
-  <p>影片把它拆成 8 個「一分鐘單元」,順序是:身分 → 否定 → 疑問 → 所有 → 確認 → 句型 → 數字 → 量詞。</p>
-  <table>
-    <thead><tr><th>講</th><th>時間</th><th>主題</th><th>核心句型</th></tr></thead>
-    <tbody>
-      <tr><td>語法1</td><td>2:24:57</td><td>表達身份</td><td>N1 は N2 です(N1 是 N2)</td></tr>
-      <tr><td>語法2</td><td>2:28:39</td><td>否定身份</td><td>N1 は N2 では(じゃ)ありません</td></tr>
-      <tr><td>語法3</td><td>2:31:56</td><td>一般疑問</td><td>N1 は N2 ですか。(N1 是 N2 嗎?)</td></tr>
-      <tr><td>語法4</td><td>2:36:09</td><td>所有格</td><td>N1 は N2 の N3 です。</td></tr>
-      <tr><td>語法5</td><td>2:41:06</td><td>表達確認</td><td>句尾 ね(終助詞)</td></tr>
-      <tr><td>語法6</td><td>2:45:10</td><td>中頓</td><td>～は～で、～です</td></tr>
-      <tr><td>語法7</td><td>2:49:49</td><td>數數</td><td>數字 1–10000</td></tr>
-      <tr><td>語法8</td><td>2:55:36</td><td>量詞</td><td>人數、歲數、年級</td></tr>
-    </tbody>
-  </table>
+<h2>這樣一份多少錢</h2>
+<p>屬於<a href="../../service/index.html">方案 A「把一團亂變成一份表」</a>:固定價 NT$1,500、3 個工作天,含一次修改。素材越整齊越快,越散越慢;報價前會先講清楚是哪一種。</p>
+<p>如果你手上也有一堆看不完的課程影片、會議錄影、線上講座,做法是一樣的。</p>
 
-  <h3>語法1 表達身份(2:24:57)</h3>
-  <ul>
-    <li>句型:<span class="jp">N1 は N2 です。</span>= N1 是 N2。</li>
-    <li>例句:<span class="jp">私は高橋です。</span>(わたし たかはし)= 我是高橋。<span class="jp">私は学生です。</span>(がくせい)= 我是學生。</li>
-    <li>注意:<span class="jp">は</span> 在這裡唸 wa(助詞讀音)。</li>
-  </ul>
+<h2>關於這份範例</h2>
+<ul>
+  <li>影片名稱、頻道、連結一律不公開;表格內容用通用的日語學習知識重寫,不照抄影片字幕。</li>
+  <li>長度、章節數、段落比重都做了模糊處理(只寫「大約三小時」「二十幾段」),不對應任何一支特定影片。</li>
+  <li>整理者:hanakujira。</li>
+</ul>
 
-  <h3>語法3 一般疑問(2:31:56)</h3>
-  <ul>
-    <li>句型:<span class="jp">N1 は N2 ですか。</span>= N1 是 N2 嗎?</li>
-    <li>答法:<span class="jp">はい／ええ、そうです。</span>(是的)/<span class="jp">いいえ、ちがいます。医者です。</span>(不,不是。是醫生。)</li>
-    <li>例句:<span class="jp">彼女は教師ですか。</span>→ 她是老師嗎?</li>
-    <li>單詞:彼女「かのじょ」① 她|教師「きょうし」① 老師|医者「いしゃ」① 醫生</li>
-  </ul>
-
-  <h3>語法4 所有格(2:36:09)</h3>
-  <ul>
-    <li>「の」的兩個用法:
-      <br>1. 表示所有、所屬,連接兩個名詞,相當於中文的「的」
-      <br>2. 連接兩個名詞,<strong>不譯</strong>(只做連接)</li>
-    <li>例句:所属 → <span class="jp">中国の人</span>;所有 → <span class="jp">私の本</span>;名詞連接 → <span class="jp">日本語の本</span>、<span class="jp">日本語の先生</span></li>
-    <li>練習句型:<span class="jp">N1 は N2 の N3 です。</span>= N1 是 N2 的 N3。
-      <br><span class="jp">これ</span> ⓪ 這、這個|<span class="jp">私</span>「わたし」⓪ 我|<span class="jp">鞄</span>「かばん」⓪ 包 → 這是我的包。</li>
-    <li>單詞:人「ひと」⓪ 人|本「ほん」① 書|中国「ちゅうごく」① 中國|日本語「にほんご」⓪ 日語</li>
-  </ul>
-
-  <h3>語法5 表達確認(2:41:06)</h3>
-  <ul>
-    <li><span class="jp">ね</span> 是終助詞,接在句尾。兩種用法:①徵求對方的贊同或確認 ②輕微的感嘆。</li>
-    <li>例:①<span class="jp">いい天気ですね。</span>(輕微感嘆)②<span class="jp">貴方は教師ですね。</span>(向對方確認)③ A:<span class="jp">猫は可愛いですね。</span>B:<span class="jp">そうですね。</span></li>
-  </ul>
-
-  <h3>單詞怎麼教(每一頁固定四行)</h3>
-  <table>
-    <thead><tr><th>項目</th><th>內容</th></tr></thead>
-    <tbody>
-      <tr><td>單詞</td><td>私【わたし】</td></tr>
-      <tr><td>羅馬音</td><td>wa ta si(xi) —— し 打字可打 si,也可打 xi</td></tr>
-      <tr><td>聲調</td><td>⓪(平板)</td></tr>
-      <tr><td>中文</td><td>我</td></tr>
-    </tbody>
-  </table>
-  <p class="kv">同格式的其他例子:鞄【かばん】⓪ 包(ka ba nn)|そう ① 那樣(sou)|天気【てんき】① 天氣(te nn ki)</p>
-
-  <h2>六、還沒補的部分</h2>
-  <div class="lead todo">
-    <p>五十音 41 個假名各自的聯想記憶 → 約 41 張畫面</p>
-    <p>語法 2 / 6 / 7 / 8 各自的例句與板書 → 約 8–12 張畫面</p>
-    <p>特殊音各段的例子 → 約 5 張畫面</p>
-    <p>粗估全補要再看 55–60 張畫面;若只要語法那一段,約 12 張。</p>
-  </div>
-
-  <footer>
-    <span>整理者:花鯨鯨</span>
-    <span>原始素材長度 3:02:16|2026-10-29</span>
-  </footer>
-
-</main>
+<p><a class="cta" href="../../service/index.html">看服務內容與報價</a></p>
+</article></div>
+<footer><div class="wrap">
+  <a href="../../terms/index.html">服務條款</a> · <a href="../../refund/index.html">退費說明</a> · <a href="../../privacy/index.html">隱私權政策</a><br>
+  內容以繁體中文撰寫。
+</div></footer>
 </body>
 </html>
