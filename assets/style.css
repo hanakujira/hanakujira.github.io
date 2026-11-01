@@ -15,7 +15,13 @@ nav{
   border-bottom:1px solid var(--line); background:#fff;
 }
 nav .wrap{display:flex;gap:20px;align-items:center;height:56px;font-size:15px}
-nav .brand{font-weight:700;color:var(--ink);margin-right:auto}
+nav .brand{font-weight:700;color:var(--ink);margin-right:auto;display:flex;align-items:center;gap:8px}
+nav .brandlogo{width:24px;height:24px;display:block}
+/* 遠端還沒改 HTML 的頁面:用 CSS 補上同一顆小圓鯨,不必逐頁上傳 */
+nav .brand:not(:has(img))::before{
+  content:""; width:24px; height:24px; display:block; flex:none;
+  background:url("logo.png") center/contain no-repeat;
+}
 header.top{padding:64px 0 36px;border-bottom:1px solid var(--line)}
 h1{font-size:clamp(27px,5vw,40px);line-height:1.25;margin:0 0 16px;letter-spacing:-.01em}
 .lede{font-size:18px;color:var(--muted);margin:0;max-width:34em}
@@ -68,5 +74,17 @@ article.post th,article.post td{border:1px solid var(--line);padding:10px 12px;t
 article.post th{background:#f3f6fa;font-weight:600}
 article.post hr{border:none;border-top:1px solid var(--line);margin:36px 0}
 article.post img{max-width:100%}
+/* 常見問題:折疊清單 */
+.faq{margin:0}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px;margin-bottom:12px}
+.faq summary{cursor:pointer;font-weight:600;font-size:16px;padding:16px 0;list-style:none;position:relative;padding-right:32px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:14px;color:var(--accent);font-size:20px;font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details[open] summary{border-bottom:1px solid var(--line);margin-bottom:14px}
+.faq details p{color:var(--muted);font-size:15px;margin:0 0 14px}
+.faq details p:last-child{margin-bottom:18px}
+.faq details ul.plain{margin:0 0 14px;padding-left:1.2em}
+
 footer{padding:40px 0 80px;color:var(--muted);font-size:14px}
 @media(max-width:560px){.card{grid-template-columns:1fr}.price{text-align:left}}
