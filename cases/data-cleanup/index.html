@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一張看起來沒問題的名單，其實少了三位數 ─ 資料檢核工具功能示範</title>
+<meta name="description" content="Excel／CSV 檢核與清理工具的功能示範：20 份自行建立的測試檔、10 條檢查規則、預期與實際結果對照、已知限制。非真實客戶委託。">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="把一團亂變成一份表">
+<meta property="og:title" content="一張看起來沒問題的名單，其實少了三位數">
+<meta property="og:description" content="Excel／CSV 檢核與清理工具的功能示範：測試設計、預期與實際結果對照、已知限制。非真實客戶委託。">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="icon" href="../../assets/logo.png">
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="../../index.html"><img class="brandlogo" src="../../assets/logo.png" alt="" />hanakujira</a>
+  <a href="../../index.html">文章</a>
+  <a href="../../service/index.html">服務</a>
+</div></nav>
+<div class="wrap"><article class="post">
+
+<p class="badge">功能示範</p>
+<h1>一張看起來沒問題的名單，其實少了三位數</h1>
+
+<blockquote><p><strong>功能示範｜使用自行建立的模擬資料，非真實客戶委託。</strong><br>
+本頁展示 Excel／CSV 檢查器與清理工具的實際操作結果。資料為自行建立的測試資料，並非客戶案件或商業委託。<br><br>
+會做這一頁，是因為有一類錯誤眼睛看不出來：舊系統匯出的檔案裡，金額寫成 <code>NT$1,500</code> 但逗號沒加引號，讀進來就變成兩欄 —— 表面上有數字，其實後面三位被切到隔壁欄去了。<br>
+所以這工具的價值不在「整理得漂亮」，在<strong>把看不出來的錯講出來</strong>。</p></blockquote>
+
+<h2>這一頁對應的服務</h2>
+<p>這頁展示的是<strong>方案 A「資料檢核」</strong>（NT$600、1 個工作天）與<strong>方案 B「資料檢核＋清理」</strong>（NT$1,500、3 個工作天）背後的工具。買了之後你會拿到的是：</p>
+<ul>
+  <li><strong>方案 A</strong>：一頁檢查報告 —— 五秒摘要（能不能直接用、三個最大的問題、建議動作）、規模、欄位結構、格式與值域、重複與缺漏、跨欄矛盾，每項標「可自動修／需你決定／不建議動」，附每類問題的三個例子與清理預覽。<strong>原檔不會被改動。</strong></li>
+  <li><strong>方案 B</strong>：清理後的檔案、變更紀錄（哪一欄怎麼改、為什麼）、加上同一份檢查報告。</li>
+</ul>
+<p>兩者是同一份資料的兩種買法：先做 A 知道問題在哪，要修再升級 B（A 的費用折抵）。<a href="../../service/index.html">服務內容與價格</a></p>
+
+<h2>測試設計</h2>
+<p>為了確認工具不是「剛好對」，而不是「真的會抓」，測試是這樣做的：</p>
+<ul>
+  <li><strong>20 份測試檔</strong>，每份只放一種（或刻意混兩種）問題，事先<strong>寫下預期答案</strong>：應該判幾個「必須修」、幾個「建議修」、報告裡應該出現哪一句話。</li>
+  <li>另外 <strong>4 項清理行為</strong>單獨驗：金額去千分位、逗號沒跳脫時不吃資料、完全重複的列會刪掉、欄位名兩側空白會去掉。</li>
+  <li>每一份都跑工具、跟預期<strong>逐項比對</strong>；只要有一項對不上就算失敗，不採人工目測。</li>
+  <li>測試檔的內容固定寫在程式裡，<strong>任何人重跑都得到同樣結果</strong>（可重現）。</li>
+</ul>
+
+<h3>檢查的十條規則</h3>
+<ol class="steps">
+  <li><b>欄位名</b><span>不能有空白、不能重複、兩側空格會去掉。</span></li>
+  <li><b>日期</b><span>全部認得出來、全部同一種寫法（統一到 <code>YYYY-MM-DD</code>）。</span></li>
+  <li><b>數字</b><span>不能有千分位逗號、貨幣符號、前後空白；文字型數字要轉成數字。</span></li>
+  <li><b>email</b><span>格式對不對；含大寫的另外提醒（比對時會對不上）。</span></li>
+  <li><b>電話</b><span>認不得的號碼、長度不一致（少了區碼？）。</span></li>
+  <li><b>重複列</b><span>完全相同的列有幾筆。</span></li>
+  <li><b>空白格</b><span>每一欄的空白比例。</span></li>
+  <li><b>欄數一致</b><span>每列欄數要跟表頭一樣（這條抓的就是逗號沒跳脫）。</span></li>
+  <li><b>筆數與編碼</b><span>幾列幾欄、解出來是哪種編碼（UTF-8／Big5）。</span></li>
+  <li><b>清理前後對得上</b><span>變更記錄寫明改了哪一欄、哪一筆、改成什麼。</span></li>
+</ol>
+
+<h2>檢查結果（示範資料）</h2>
+<p>以其中一份舊檔為例：<strong>3 列 × 5 欄、Big5 編碼</strong>，檢查結果是 <strong>1 個必須修、2 個建議修</strong>。</p>
+<table>
+<tr><th>結果</th><th>規則</th><th>說明</th></tr>
+<tr><td class="ok">通過</td><td>欄位名</td><td>無空白、無重複</td></tr>
+<tr><td class="warn">建議修</td><td>email</td><td>「cust_mail」有 1 筆含大寫，比對時會對不上</td></tr>
+<tr><td class="ok">通過</td><td>日期</td><td>「reg_date」格式統一</td></tr>
+<tr><td class="warn">建議修</td><td>數字</td><td>「amt」有 3 筆不乾淨（千分位／貨幣符號），例：<code>NT$1</code></td></tr>
+<tr><td class="ok">通過</td><td>重複列</td><td>沒有完全重複的列</td></tr>
+<tr><td class="bad">必須修</td><td>欄數一致</td><td>有 2 列是 6 欄、1 列是 5 欄 —— 逗號沒跳脫，資料會被吃掉</td></tr>
+<tr><td class="info">資訊</td><td>概況</td><td>共 3 列、5 欄（編碼 cp950）</td></tr>
+</table>
+
+<h3>清理前（示範資料）</h3>
+<table>
+<tr><th>cust_name</th><th>cust_tel</th><th>cust_mail</th><th>reg_date</th><th>amt</th></tr>
+<tr><td>黃美玲</td><td>0933111222</td><td>MEILING@example.com</td><td>20240107</td><td>NT$1 / 500</td></tr>
+<tr><td>王建民</td><td>0922-333-444</td><td>wang44@example.com</td><td>20240112</td><td>NT$1500</td></tr>
+<tr><td>陳怡君</td><td>0912-345-678</td><td>yichun@example.com</td><td>20240105</td><td>NT$1 / 500</td></tr>
+</table>
+<p class="sub">金額那欄被逗號切成兩欄，是這份檔案最危險的地方：看起來有數字，其實少了三位。</p>
+
+<h3>清理後（示範資料）</h3>
+<table>
+<tr><th>cust_name</th><th>cust_tel</th><th>cust_mail</th><th>reg_date</th><th>amt</th></tr>
+<tr><td>黃美玲</td><td>0933111222</td><td>meiling@example.com</td><td>2024-01-07</td><td>1500</td></tr>
+<tr><td>王建民</td><td>0922333444</td><td>wang44@example.com</td><td>2024-01-12</td><td>1500</td></tr>
+<tr><td>陳怡君</td><td>0912345678</td><td>yichun@example.com</td><td>2024-01-05</td><td>1500</td></tr>
+</table>
+
+<h3>變更記錄（示範資料，節錄）</h3>
+<ul>
+  <li>cust_mail：<code>MEILING@example.com</code> → <code>meiling@example.com</code></li>
+  <li>reg_date：<code>20240107</code> → <code>2024-01-07</code></li>
+  <li>amt：<code>NT$1,500</code> → <code>1500</code></li>
+  <li>cust_tel：<code>0922-333-444</code> → <code>0922333444</code></li>
+  <li>有 2 列的逗號沒跳脫，已把多出的內容併回最後一欄，<strong>並標記「請人眼再確認」</strong></li>
+</ul>
+
+<h2>預期與實際結果對照（示範資料）</h2>
+<p>20 份測試檔的預期答案與實際跑出來的結果：</p>
+<table>
+<tr><th>#</th><th>測試檔在測什麼</th><th>預期<br>必須修／建議修</th><th>實際</th><th>結果</th></tr>
+<tr><td>01</td><td>乾淨的資料（對照組，不該報錯）</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>02</td><td>表頭有空白欄位名</td><td>1／0</td><td>1／0</td><td class="ok">一致</td></tr>
+<tr><td>03</td><td>欄位名重複</td><td>1／0</td><td>1／0</td><td class="ok">一致</td></tr>
+<tr><td>04</td><td>email 格式錯</td><td>1／0</td><td>1／0</td><td class="ok">一致</td></tr>
+<tr><td>05</td><td>email 含大寫</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>06</td><td>電話認不出來</td><td>1／0</td><td>1／0</td><td class="ok">一致</td></tr>
+<tr><td>07</td><td>電話長度不一</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>08</td><td>日期認不出來（「下週三」）</td><td>1／0</td><td>1／0</td><td class="ok">一致</td></tr>
+<tr><td>09</td><td>日期兩種寫法混用</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>10</td><td>金額有千分位逗號（有加引號）</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>11</td><td>金額的逗號沒加引號</td><td>1／1</td><td>1／1</td><td class="ok">一致</td></tr>
+<tr><td>12</td><td>完全重複的列</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>13</td><td>有空白格</td><td>0／1</td><td>0／1</td><td class="ok">一致</td></tr>
+<tr><td>14</td><td>某列少一欄</td><td>1／1</td><td>1／1</td><td class="ok">一致</td></tr>
+<tr><td>15</td><td>UTF-8 帶 BOM（不能多出怪字）</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>16</td><td>Big5 舊檔（不能變亂碼）</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>17</td><td>只有表頭、沒有資料</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>18</td><td>只有一欄</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>19</td><td>欄位名前後有空白</td><td>0／0</td><td>0／0</td><td class="ok">一致</td></tr>
+<tr><td>20</td><td>多種錯混在同一份</td><td>2／2</td><td>2／2</td><td class="ok">一致</td></tr>
+</table>
+<p class="sub">加上 4 項清理行為（金額去千分位／逗號沒跳脫不吃資料／重複列會刪／欄位名去空白），合計 <strong>24 項預期行為測試全部通過</strong>。<br>
+講清楚一點：這是「我們事先寫下的 24 個預期結果，工具全部對上」，<strong>不等於「24 種錯誤都抓得到」</strong>。規則以外的問題還是要靠人看。</p>
+<p>過程中真的抓到一個 bug：<strong>「欄數不一致」原本只比對資料列彼此，沒跟表頭比</strong> —— 所以只有一列出錯時它不吭聲。改成把表頭寬度也算進去之後才對。這也是為什麼要有測試檔：自己寫的檢查器，自己看是看不出來的。</p>
+
+<h2>已知限制</h2>
+<p class="sub">分兩類寫：一類是我<strong>選擇不替你做決定</strong>的地方，一類是<strong>這套工具管不到</strong>的邊界。先講清楚，比出事再解釋好。</p>
+<h3>服務判斷原則（我不替你決定的）</h3>
+<ul>
+  <li><strong>不會猜資料。</strong>空白就是空白，不會自行推測「這格應該填什麼」，也不擅自補值。</li>
+  <li><strong>只用寫下來的規則判斷。</strong>十條規則以外的事，我不會憑感覺幫你標。</li>
+  <li><strong>日期有歧義時不擅自猜</strong>（例如 <code>03/04/2024</code> 到底是三月四日還是四月三日），會列出來請你確認。</li>
+  <li><strong>email／電話只依格式判斷</strong>，不代表那個信箱或號碼真的存在、真的通。</li>
+</ul>
+<h3>服務範圍與品質邊界（工具管不到的）</h3>
+<ul>
+  <li><strong>不保證所有格式錯誤都抓得到。</strong>自動檢核只涵蓋頁面上列出的規則；規則外的問題要靠人看。</li>
+  <li><strong>重複是「完全相同」才算</strong>；名字打錯一個字的不會自動判定成同一人。</li>
+  <li><strong>不做「清理後一定可用」的背書。</strong>資料真偽與業務正確性由資料所有人負責。</li>
+  <li><strong>不改原始檔。</strong>原始資料會保留，清理結果另存輸出，並附變更紀錄供你逐筆核對。</li>
+</ul>
+
+<h2>適合誰</h2>
+<ul>
+  <li>公司裡有一份「每年都要重打一次」的名單或對帳表。</li>
+  <li>兩個系統匯出的格式不一樣，每次合併都要手工調。</li>
+  <li>資料要匯進別人的系統，對方回一句「格式不對，重弄」。</li>
+  <li>想先知道「這份資料到底有什麼問題」，再決定要不要清理。</li>
+</ul>
+
+<h2>承接範圍</h2>
+<table>
+<tr><th>項目</th><th>方案 A｜檢核</th><th>方案 B｜檢核＋清理</th></tr>
+<tr><td>適合</td><td>先看資料有什麼問題</td><td>要一份能直接用的表</td></tr>
+<tr><td>交付</td><td>檢查報告一頁（規則、筆數、異常筆數、例子）</td><td>清理後的檔案＋變更記錄＋檢查報告</td></tr>
+<tr><td>範圍</td><td>1 份檔案、2,000 列內、20 欄內</td><td>1 份檔案、1 個工作表、2,000 列內、20 欄內、依規則清理</td></tr>
+<tr><td>工作天</td><td>1 個工作天</td><td>3 個工作天</td></tr>
+<tr><td>價格</td><td><strong>NT$600</strong></td><td><strong>NT$1,500</strong></td></tr>
+<tr><td>升級</td><td colspan="2">先做 A 再決定升級 B，A 的費用全額折抵。</td></tr>
+</table>
+<p><strong>不含</strong>：人工逐筆判斷與補值、跨表合併、特殊格式轉換或 OCR、超出原始欄位的追加修改。</p>
+<p><strong>不接</strong>：需要代客登入他人帳號的、要求資料完全離開網路環境的、要串金流的。</p>
+
+<p class="sub">流程：先給一小段免費樣本（證明看得懂你的資料）→ 固定價報價 → 開工 → 交件 → 驗收後付清。範圍內含 1 次修正（修我的錯，不是加新需求）。全程文字，不開會、不通話。</p>
+
+</article></div>
+<footer><div class="wrap"><p>© hanakujira · <a href="../../index.html">回到首頁</a></p></div></footer>
+</body></html>
